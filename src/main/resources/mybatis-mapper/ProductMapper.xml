@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.winsen.demo.repository.ProductRepository">
+    <resultMap id="result" type="product">
+        <id property="id" column="ID"/>
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="unit" column="unit"/>
+        <result property="remark" column="remark"/>
+        <result property="deleted" column="deleted"/>
+        <result property="creator" column="creator"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <select id="findById" parameterType="String" resultType="product" resultMap="result">
+        SELECT * FROM product where ID = #{id}
+    </select>
+
+    <insert id="insert" keyProperty="id" parameterType="product">
+        INSERT INTO product(ID, code, name, price, unit, remark, deleted, creator, created_time)
+        VALUES (#{id}, #{code}, #{name}, #{price}, #{unit}, #{remark}, #{deleted}, #{creator}, #{createdTime})
+    </insert>
+</mapper>

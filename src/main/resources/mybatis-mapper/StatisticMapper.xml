@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.winsen.demo.repository.StatisticRepository">
+    <resultMap id="result" type="productSales">
+        <id property="id" column="ID"/>
+        <result property="code" column="code"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+        <result property="unit" column="unit"/>
+        <result property="quantity" column="quantity"/>
+    </resultMap>
+
+    <select id="getProductSalesSortedByQuantity" resultType="productSales">
+        SELECT order_detail.item_id, product.id, product.code, product.name, product.price, product.unit, order_detail.quantity
+        FROM order_detail
+        LEFT JOIN product ON order_detail.item_id = product.ID ORDER BY order_detail.quantity DESC
+    </select>
+
+</mapper>
